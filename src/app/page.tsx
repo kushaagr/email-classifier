@@ -13,6 +13,7 @@ import EmailItem from "@/components/EmailItem";
 
 import { cn } from "@/lib/utils";
 import { getEmails } from "@/lib/email-data";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 function Header(props: { className?: string }) {
   return (
@@ -32,7 +33,12 @@ function Header(props: { className?: string }) {
 function MenuBar(props: { className?: string }) {
   return (
     <div className={cn("flex justify-between", props.className)}>
-      <SelectCount />
+      <div className="flex flex-wrap flex-row gap-2">
+        <SelectCount />
+        <Button isIconOnly radius="full" size="md">
+          <ReloadIcon/>
+        </Button>
+      </div>
 
       <div className="flex gap-2">
         <ModalButton />

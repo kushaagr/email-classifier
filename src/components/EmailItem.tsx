@@ -47,12 +47,12 @@ export default function EmailItem(props: {
       >
         <ModalContent>
           {(onClose) => (
-            <>
-              <ModalHeader>{props.email.heading}</ModalHeader>
-              <ModalBody className="max-h-screen overflow-y-auto whitespace-pre-wrap">
+            <div className="mx-auto max-w-screen-lg">
+              <ModalHeader className="">{props.email.heading}</ModalHeader>
+              <ModalBody className="max-h-screen overflow-y-auto whitespace-pre-wrap ">
                 {props.email.body.replaceAll("\n", "\n")}
               </ModalBody>
-            </>
+            </div>
           )}
         </ModalContent>
       </Modal>

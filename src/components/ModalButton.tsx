@@ -21,7 +21,7 @@ export default function ModalButton(props: { className?: string }) {
 
   return (
     <div className={cn("", props.className)}>
-      <Button disableRipple disableAnimation onPress={onOpen}>OpenAI API key</Button>
+      <Button radius="sm" disableRipple disableAnimation onPress={onOpen}>OpenAI API key</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} hideCloseButton>
         <ModalContent>
           {(onClose) => (
