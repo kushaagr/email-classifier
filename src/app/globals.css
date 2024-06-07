@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+
+  .truncate-lines {
+    max-height: calc(1.5em * var(--lines, 1));
+    display: -webkit-box;
+    -webkit-line-clamp: var(--lines, 1);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .lines-2 {
+    --lines: 2;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
