@@ -71,9 +71,9 @@ async function EmailsList(props: { className?: string }) {
       {/* <EmailItem email={emails[0]} label="General"/> */}
       {labelled
         ? emails.map((email, index) => (
-            <EmailItem email={email} label={labels[index]} />
+            <EmailItem key={`labelled-email-${index}`} email={email} label={labels[index]} />
           ))
-        : emails.map((email) => <EmailItem email={email} />)}
+        : emails.map((email) => <EmailItem key={`unlabelled-email-${index}`} email={email} />)}
     </div>
   );
 }
