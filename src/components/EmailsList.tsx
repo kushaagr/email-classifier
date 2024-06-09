@@ -94,22 +94,26 @@ function MenuBar(props: {
           radius="sm"
           className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
           onPress={async () => {
-          props.setLoading(true);
-          const { object, error } = await generate(props.emailsString, apikey);
-          props.setLoading(false);
-          if (object == "") {
-            console.log(error?.type, ":", error?.message);
-            toast({title: "Something went wrong", description: error.message});
-          } else 
-            props.setGeneration(JSON.parse(object).data);
-          // for await (const partialObject of readStreamableValue(object)) {
-          //   if (partialObject) {
-          //     props.setGeneration(
-          //       JSON.stringify(partialObject.notifications, null, 2),
-          //     );
-          //   }
-          // }
-        }}
+            if (apikey.trim() === "") {
+              toast({title: "No API key found", description: "Paste your OpenAI api key clicking 'OpenAI API key' button"});
+              return;
+            }
+            props.setLoading(true);
+            const { object, error } = await generate(props.emailsString, apikey);
+            props.setLoading(false);
+            if (object == "") {
+              console.log(error?.type, ":", error?.message);
+              toast({title: "Something went wrong", description: error?.message ?? "Something went wrong"});
+            } else 
+              props.setGeneration(JSON.parse(object).data);
+            // for await (const partialObject of readStreamableValue(object)) {
+            //   if (partialObject) {
+            //     props.setGeneration(
+            //       JSON.stringify(partialObject.notifications, null, 2),
+            //     );
+            //   }
+            // }
+          }}
 
         >
           Classify

@@ -45,18 +45,22 @@ export async function generate(input: string, apiKey?: string) {
       }),
     });
     return {object: JSON.stringify(object, null, 2), error: null};
-  } catch (err) {
+  } catch (e) {
+    const err = e as Error;
     return {object: "", error: {message: err.message, type: typeof(err)}}
   };
 
 }
 
-export async function generateStream(input: string) {
+export async function generateStream(input: string, apiKey?: string) {
   'use server';
 
   try {
     const stream = createStreamableValue();
-
+    let openai = oai;
+    if (apiKey != null) {
+      openai = createOpenAI({ apiKey, compatibility: 'strict' });
+    }
     (async () => {
       const { partialObjectStream } = await streamObject({
         model: openai('gpt-3.5-turbo-16k'),
@@ -96,8 +100,8 @@ export async function generateStream(input: string) {
     })();
 
     return { object: stream.value };
-  } catch (err) {
-    return { error: err.message, object: '' };
+  } catch (error) {
+    return { error, object: '' };
   }
 }
 

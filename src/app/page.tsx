@@ -9,6 +9,7 @@ import {
 
 
 import EmailsList from "@/components/EmailsList";
+import { Toaster } from "@/components/ui/toaster";
 
 import { cn } from "@/lib/utils";
 
@@ -40,6 +41,7 @@ export default function Home() {
       {/* <ModalReadInput /> */}
       <EmailsList />
       {/* <ModalDisplayFullEmail /> */}
+      <Toaster />
     </main>
   );
 }
