@@ -17,7 +17,16 @@ import { ClipboardIcon } from "@radix-ui/react-icons";
 
 export default function ModalButton(props: { className?: string }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [value, setValue] = React.useState<string>("");
+  const [value, setValue] = React.useState<string>(
+    typeof window !== "undefined" ?
+    (window.localStorage.getItem('openai-apikey') || "") : ""
+  );
+
+  function handleChange(value: string) {
+    const apikey = value.trim();
+    localStorage.setItem('openai-apikey', apikey);
+    setValue(apikey);
+  }
 
   return (
     <div className={cn("", props.className)}>
@@ -30,14 +39,14 @@ export default function ModalButton(props: { className?: string }) {
               <div className="flex flex-row items-center">
                 <Input
                   value={value}
-                  onValueChange={setValue}
+                  onValueChange={handleChange}
                   label="openai-key"
                   placeholder="Paste your OpenAI API key..."
                   radius="sm"
                 />
                 <Button
                   onPress={(e) => {
-                    navigator.clipboard.readText().then(setValue)
+                    navigator.clipboard.readText().then(handleChange)
                   }}
                   radius="sm"
                   size="lg"

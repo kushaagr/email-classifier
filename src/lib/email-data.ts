@@ -4,7 +4,7 @@ export type Email = {
     sender: string;
     heading: string;
     body: string;
-    label: string;
+    label?: string;
 };
 // type Emails = ReturnType<typeof getEmails>[0]
 
