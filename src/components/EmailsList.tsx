@@ -26,31 +26,38 @@ export default function EmailsList(props: { className?: string }) {
   const [labels, setLabels] = useState<Label[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [labelled, setLabelled] = useState<boolean>(false);
+  const [shouldInform, setShouldInform] = useState<boolean>(false);
   const { toast } = useToast();
 
   // const [generation, setGeneration] = useState<string>("");
 
   useEffect(() => {
     getEmails().then((emails: Email[]) => {
-      emails.forEach((email) => {delete email['label']});
       /** const labels: For prototyping only */
-      const labels = emails.map((_) => {
+      /* const labels = emails.map((_) => {
         // console.log(Math.floor(Math.random() * emails.length));
         return ["Imp", "Gen", "Soci", "Promo", "Spam", "Mar"][
           Math.floor(Math.random() * 6)
         ];
       });
+      */
+      emails.forEach((email) => {delete email['label']});
       setEmails(emails);
-      toast({
-        title: "Showing sample emails", 
-        description: "Gmail API integration is broken at the moment.\n"
-         + "OpenAI & OAuth are working fine though."
-        });
+      setShouldInform(true);
 
       // setLabels(labels);
       // setLabelled(true);
     });
   }, []);
+
+  if (shouldInform) {
+    toast({
+      title: "Showing sample emails", 
+      description: "Gmail API integration is broken at the moment.\n"
+      + "OpenAI & OAuth are working fine though."
+    });
+    setShouldInform(false);
+  }
 
   return (
     <div className={cn("flex flex-col gap-2", props.className)}>
