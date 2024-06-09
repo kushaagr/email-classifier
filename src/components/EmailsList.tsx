@@ -26,6 +26,8 @@ export default function EmailsList(props: { className?: string }) {
   const [labels, setLabels] = useState<Label[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [labelled, setLabelled] = useState<boolean>(false);
+  const { toast } = useToast();
+
   // const [generation, setGeneration] = useState<string>("");
 
   useEffect(() => {
@@ -39,6 +41,12 @@ export default function EmailsList(props: { className?: string }) {
         ];
       });
       setEmails(emails);
+      toast({
+        title: "Showing sample emails", 
+        description: "Gmail API integration is broken at the moment.\n"
+         + "OpenAI & OAuth are working fine though."
+        });
+
       // setLabels(labels);
       // setLabelled(true);
     });

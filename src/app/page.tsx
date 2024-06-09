@@ -40,6 +40,7 @@ function Header(props: { userdata: User, className?: string }) {
         name={props.userdata.name}
         description={props.userdata.email}
         avatarProps={{
+          name: props.userdata.name,
           src: props.userdata.image,
         }}
       />
@@ -58,12 +59,11 @@ export default async function Home() {
     redirect('/api/auth/signin/');
   }
 
+
   return (
     <main className="mx-auto box-content grid max-w-[80ch] grid-flow-row auto-rows-max gap-7 p-7 outline-dashed outline-1 outline-rose-500">
       <Header userdata={session.user as User} />
-      {/* <ModalReadInput /> */}
       <EmailsList />
-      {/* <ModalDisplayFullEmail /> */}
       <Toaster />
     </main>
   );
